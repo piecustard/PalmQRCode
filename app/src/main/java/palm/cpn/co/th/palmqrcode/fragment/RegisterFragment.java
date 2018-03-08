@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,10 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import palm.cpn.co.th.palmqrcode.MainActivity;
 import palm.cpn.co.th.palmqrcode.R;
 import palm.cpn.co.th.palmqrcode.utility.MyAlert;
+import palm.cpn.co.th.palmqrcode.utility.MyConstance;
+import palm.cpn.co.th.palmqrcode.utility.PostNewUserToServer;
 
 /**
  * Created by Lorien on 08/03/2018.
@@ -61,7 +65,30 @@ public class RegisterFragment extends Fragment{
                     "Please Fill All Blank");
         } else {
 //            No Space
+            try {
+                MyConstance myConstance = new MyConstance();
+                PostNewUserToServer postNewUserToServer = new PostNewUserToServer(getActivity());
+                postNewUserToServer.execute(                     // execute() = ทำให้เกิดการประมวลผล
+                                                nameString,
+                                                userString,
+                                                passwordString,
+                                                myConstance.getUrlAddUser()
+                                            );
+                String result = postNewUserToServer.get();
+                Log.d("8MarchV1", "result ==> " + result);
 
+                if (Boolean.parseBoolean(result)) {
+                    Toast.makeText(getActivity(), "Welcome to App",
+                            Toast.LENGTH_SHORT).show(); // Toast ส่งถามแต่ไม่ได้ต้องการคำตอบจริงจัง จะส่งมาหรือเปล่าก็ได้
+                    getActivity().getSupportFragmentManager().popBackStack();
+                } else {
+                    Toast.makeText(getActivity(), "Error Upload to Server",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }   // try
         }   // if
 
 
