@@ -7,8 +7,13 @@ package palm.cpn.co.th.palmqrcode.utility;
 public class MyConstance {
 
     private String urlAddUser = "http://androidthai.in.th/cent/addDataPalm.php";
+    private String urlReadAllUser = "http://androidthai.in.th/cent/getAllDataPalm.php";
 
     public String getUrlAddUser() {
         return urlAddUser;
+    }
+
+    public String getUrlReadAllUser() {
+        return urlReadAllUser;
     }
 }
