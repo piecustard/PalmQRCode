@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -21,7 +22,7 @@ import palm.cpn.co.th.palmqrcode.utility.MyConstance;
  * Created by Lorien on 12/03/2018.
  */
 
-public class ShowAllFragment extends Fragment{
+public class ShowAllFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -48,24 +49,39 @@ public class ShowAllFragment extends Fragment{
             String jsonString = getAllData.get();                       // Get Data มาใส่ใน jsonString (เป็นแบบ JSON)
             Log.d(tag, "JSON ==> " + jsonString);                  // เก็บ Logcat
 
-            JSONArray jsonArray = new JSONArray(jsonString);            // Create เพื่อเก็บ String ที่อยู่ใน JSON
+            JSONArray jsonArray = new JSONArray(jsonString);            // Create เพื่อเก็บ String ที่อยู่ในรูปแบบ JSON
 
             String[] nameFoodStrings = new String[jsonArray.length()];  // เก็บ Array ของ name
             String[] imagePathStrings = new String[jsonArray.length()]; // เก็บ Array ของ imagePath
+            String[] categoryStrings = new String[jsonArray.length()];
+            String[] priceStrings = new String[jsonArray.length()];
+            String[] detailStrings = new String[jsonArray.length()];
 
-            for (int i=0;i<jsonArray.length();i+=1) {
+
+            for (int i = 0; i < jsonArray.length(); i += 1) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);             // อ่านทีละ row
                 nameFoodStrings[i] = jsonObject.getString("NameFood");    // เก็บค่า NameFood ใส่ Array
                 imagePathStrings[i] = jsonObject.getString("ImagePath");  // เก็บค่า ImagePath ใส่ Array
+                categoryStrings[i] = jsonObject.getString("Category");
+                priceStrings[i] = jsonObject.getString("Price");
+                detailStrings[i] = jsonObject.getString("Detail");
             } // For Loop
 
             MyAdapter myAdapter = new MyAdapter(getActivity(), nameFoodStrings, imagePathStrings);
             listView.setAdapter(myAdapter); // นำข้อมูลที่ได้ไปใส่ใน listView
 
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() { // ใส่ Event ให้ ListView
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+
+                }
+            });
+
         } catch (Exception e) {
             e.printStackTrace(); // ให้ทำการพิมพ์ Log สีแดง เมื่อเกิด Error
         }
-
 
 
     }

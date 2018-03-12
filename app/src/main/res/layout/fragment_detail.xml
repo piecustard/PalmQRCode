@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Content-->
+    <ScrollView
+        android:id="@+id/scvShowListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Title-->
+            <TextView
+                android:id="@+id/title"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:textSize="@dimen/h1"
+                android:text="Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--Image-->
+            <ImageView
+                android:id="@+id/imvImage"
+                android:layout_margin="@dimen/padding"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image" />
+
+            <!--Category and Price-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!--Category-->
+                <TextView
+                    android:id="@+id/txtCategory"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/h2"
+                    android:text="Category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <!--Price-->
+                <TextView
+                    android:id="@+id/txtPrice"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/h2"
+                    android:text="Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <!--Detail-->
+            <TextView
+                android:id="@+id/txtDetail"
+                android:layout_margin="@dimen/margin"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:textSize="@dimen/h2"
+                android:text="Detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <!--Show ListView Button-->
+    <Button
+        android:id="@+id/btnShowListView"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>
