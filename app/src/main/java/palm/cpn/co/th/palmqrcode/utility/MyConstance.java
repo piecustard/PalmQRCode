@@ -9,10 +9,10 @@ public class MyConstance {
     private String urlAddUser = "http://androidthai.in.th/cent/addDataPalm.php";
     private String urlReadAllUser = "http://androidthai.in.th/cent/getAllDataPalm.php";
 
-    private String[] columUserTableStrings = new String[]{"id", "Name", "User", "Password"};
+    private String[] columnUserTableStrings = new String[]{"id", "Name", "User", "Password"};
 
-    public String[] getColumUserTableStrings() {
-        return columUserTableStrings;
+    public String[] getColumnUserTableStrings() {
+        return columnUserTableStrings;
     }
 
     public String getUrlAddUser() {

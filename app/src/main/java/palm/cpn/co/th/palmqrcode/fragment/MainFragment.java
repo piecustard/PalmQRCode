@@ -1,5 +1,6 @@
 package palm.cpn.co.th.palmqrcode.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,11 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import palm.cpn.co.th.palmqrcode.R;
+import palm.cpn.co.th.palmqrcode.ServiceActivity;
 import palm.cpn.co.th.palmqrcode.utility.GetAllData;
 import palm.cpn.co.th.palmqrcode.utility.MyAlert;
 import palm.cpn.co.th.palmqrcode.utility.MyConstance;
@@ -23,7 +26,7 @@ import palm.cpn.co.th.palmqrcode.utility.MyConstance;
  * Created by chsuwadee on 07/03/2561.
  */
 
-public class MainFragment extends Fragment{
+public class MainFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -65,37 +68,49 @@ public class MainFragment extends Fragment{
                         Log.d("8MarchV1", "JSON ==> " + jsonString);
 
                         JSONArray jsonArray = new JSONArray(jsonString);    // สร้าง Variable สำหรับอ่าน JSON
-                        String[] columnUserStrings = myConstance.getColumUserTableStrings(); // การดึงข้อมูลจากอีกที่หนึ่งมาใช้งาน
+                        String[] columnUserStrings = myConstance.getColumnUserTableStrings(); // การดึงข้อมูลจากอีกที่หนึ่งมาใช้งาน
                         String[] loginStrings = new String[columnUserStrings.length];    // ทำการจองห้องไว้เท่ากับ columnUserStrings
                         boolean userStatus = true; //   ใช้ตรวจสอบ user ที่ไม่ถูกต้อง
 
 
-                        for (int i=0; i<jsonArray.length();i+=1) {  // วน loop อ่าน row
-                            JSONObject jsonObject = jsonArray.getJSONObject(i); // สร้างตัวชี้จาก index ที่วนลูป
-                            if (userString.equals(jsonObject.getString("User"))) { //   หา Field User
+                        for (int i = 0; i < jsonArray.length(); i += 1) {  // วน loop อ่าน row
+                            JSONObject jsonObject = jsonArray.getJSONObject(i); // สร้างตัวชี้จาก index ที่วนลูป (1 row)
+                            if (userString.equals(jsonObject.getString("User"))) { //   หา Field "User"
 //                                User True
-                                userStatus = false; // มีข้อมูล User
+                                userStatus = false; // มี Field "User"
 
-                                for (int i1=0; i1<columnUserStrings.length;i1+=1) {   // วน loop อ่าน column
+                                for (int i1 = 0; i1 < columnUserStrings.length; i1 += 1) {   // วน loop อ่าน column
                                     loginStrings[i1] = jsonObject.getString(columnUserStrings[i1]);
                                     Log.d("8MarchV1", "LoginStrings[" + i1 + "] ==> " + loginStrings[i1]);
-                                }
-
-
-
-
+                                } // for loop column
                             }
-                        }   // for loop
 
+                        }   // for loop row
 
+                        if (userStatus) { // ตรวจสอบไม่พบ Field User
+//                            User False
+                            MyAlert myAlert = new MyAlert(getActivity()); // Popup MSG
+                            myAlert.myDialog("User False", "No this user in my database.");
+                        }else if (passwordString.equals(loginStrings[3])) {
+//                                Password True
+                            Toast.makeText(getActivity(), "Welcome " + loginStrings[1],
+                                    Toast.LENGTH_SHORT).show();
 
+                            Intent intent = new Intent(getActivity(), ServiceActivity.class);
+                            intent.putExtra("Login", loginStrings);
+                            startActivity(intent);
+                            getActivity().finish();
+                        } else {
+//                                Password False
+                            MyAlert myAlert = new MyAlert(getActivity());
+                            myAlert.myDialog("Password False", "Please Try Again Password False");
+                        }
 
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
                 }
-
 
             }
         });
@@ -110,7 +125,7 @@ public class MainFragment extends Fragment{
 //                Replace Fragment
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.contentMainFragment,new RegisterFragment())
+                        .replace(R.id.contentMainFragment, new RegisterFragment())
                         .addToBackStack(null)
                         .commit();
 
@@ -121,7 +136,7 @@ public class MainFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main,container,false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
         return view;
     }   // Method Create Mask
 }   // Main Class
