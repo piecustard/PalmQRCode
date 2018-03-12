@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import palm.cpn.co.th.palmqrcode.R;
 import palm.cpn.co.th.palmqrcode.utility.GetAllData;
 import palm.cpn.co.th.palmqrcode.utility.MyAlert;
@@ -60,6 +63,32 @@ public class MainFragment extends Fragment{
 
                         String jsonString = getAllData.get();
                         Log.d("8MarchV1", "JSON ==> " + jsonString);
+
+                        JSONArray jsonArray = new JSONArray(jsonString);    // สร้าง Variable สำหรับอ่าน JSON
+                        String[] columnUserStrings = myConstance.getColumUserTableStrings(); // การดึงข้อมูลจากอีกที่หนึ่งมาใช้งาน
+                        String[] loginStrings = new String[columnUserStrings.length];    // ทำการจองห้องไว้เท่ากับ columnUserStrings
+                        boolean userStatus = true; //   ใช้ตรวจสอบ user ที่ไม่ถูกต้อง
+
+
+                        for (int i=0; i<jsonArray.length();i+=1) {  // วน loop อ่าน row
+                            JSONObject jsonObject = jsonArray.getJSONObject(i); // สร้างตัวชี้จาก index ที่วนลูป
+                            if (userString.equals(jsonObject.getString("User"))) { //   หา Field User
+//                                User True
+                                userStatus = false; // มีข้อมูล User
+
+                                for (int i1=0; i1<columnUserStrings.length;i1+=1) {   // วน loop อ่าน column
+                                    loginStrings[i1] = jsonObject.getString(columnUserStrings[i1]);
+                                    Log.d("8MarchV1", "LoginStrings[" + i1 + "] ==> " + loginStrings[i1]);
+                                }
+
+
+
+
+                            }
+                        }   // for loop
+
+
+
 
                     } catch (Exception e) {
                         e.printStackTrace();
