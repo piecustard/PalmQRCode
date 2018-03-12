@@ -5,4 +5,5 @@
     <dimen name="h2">18sp</dimen>
     <dimen name="padding">16dp</dimen>
     <dimen name="logo">180dp</dimen>
+    <dimen name="image">200dp</dimen>
 </resources>

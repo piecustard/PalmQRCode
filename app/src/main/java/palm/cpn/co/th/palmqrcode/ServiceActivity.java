@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
+import palm.cpn.co.th.palmqrcode.fragment.ShowAllFragment;
+
 public class ServiceActivity extends AppCompatActivity {
     //    Explicit
     private String tag = "12MarchV1";
@@ -28,6 +30,18 @@ public class ServiceActivity extends AppCompatActivity {
         getValueFromIntent();
 
 //        Create Toolbar
+        createToolbar();
+
+//        Add Fragment to Activity
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.contentServiceFragment, new ShowAllFragment())
+                    .commit();
+        }
+
+    }   // Main Method
+
+    private void createToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbarService);
         setSupportActionBar(toolbar);
 
@@ -43,8 +57,7 @@ public class ServiceActivity extends AppCompatActivity {
         actionBarDrawerToggle = new ActionBarDrawerToggle(ServiceActivity.this,
                 drawerLayout,R.string.open,R.string.close);
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
-
-    }   // Main Method
+    }
 
 
     @Override

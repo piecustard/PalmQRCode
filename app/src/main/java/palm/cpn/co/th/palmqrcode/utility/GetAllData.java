@@ -24,7 +24,7 @@ public class GetAllData extends AsyncTask<String, Void, String>{
         try {
             OkHttpClient okHttpClient = new OkHttpClient();
             Request.Builder builder = new Request.Builder();
-            Request request = builder.url(strings[0]).build();
+            Request request = builder.url(strings[0]).build(); // อ่านข้อความที่เป็น JSON
             Response response = okHttpClient.newCall(request).execute();
             return response.body().string();
 
