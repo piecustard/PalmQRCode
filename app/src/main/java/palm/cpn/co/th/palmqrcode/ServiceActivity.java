@@ -51,12 +51,17 @@ public class ServiceActivity extends AppCompatActivity {
 
     }   // Main Method
 
+    @Override
+    public void onBackPressed() {  // การควบคุมปุ่ม Back
+
+    }
+
     private void exitController() {
         TextView textView = findViewById(R.id.txtExit);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                finish();
             }
         });
     }
