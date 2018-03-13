@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import palm.cpn.co.th.palmqrcode.fragment.DisplayQRFragment;
 import palm.cpn.co.th.palmqrcode.fragment.QRscanFragment;
 import palm.cpn.co.th.palmqrcode.fragment.ShowAllFragment;
 
@@ -21,6 +22,7 @@ public class ServiceActivity extends AppCompatActivity {
     private String[] loginStrings; // ตัวแปรที่มารับค่า Login
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle actionBarDrawerToggle; // การทำ Toggle บน toolbar
+    private boolean aBoolean = true;
 
 
 
@@ -92,9 +94,16 @@ public class ServiceActivity extends AppCompatActivity {
 
     private void addFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.contentServiceFragment, new ShowAllFragment())
-                    .commit();
+            if (aBoolean) {                                                         // กรณี true ไปหน้า ShowAllFragment
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.contentServiceFragment, new ShowAllFragment())
+                        .commit();
+            } else {                                                                // กรณี false ไปหน้า DisplayQRFragment
+                getSupportFragmentManager().beginTransaction()
+                        .add(R.id.contentServiceFragment,
+                                DisplayQRFragment.displayQRInstance(getIntent().getStringExtra("QRcode"),loginStrings))
+                        .commit();
+            }
         }
     }
 
@@ -146,6 +155,9 @@ public class ServiceActivity extends AppCompatActivity {
 
     private void getValueFromIntent() {
         loginStrings = getIntent().getStringArrayExtra("Login");
+
+        aBoolean = getIntent().getBooleanExtra("Status", true); // รับค่า Key Name Status โดยถ้าไม่มีการส่งมา ให้ส่ง true
+
         Log.d(tag, "NameLogin ==> " + loginStrings[1]);
     }
 

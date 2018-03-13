@@ -98,6 +98,7 @@ public class MainFragment extends Fragment {
 
                             Intent intent = new Intent(getActivity(), ServiceActivity.class);
                             intent.putExtra("Login", loginStrings);
+                            intent.putExtra("Status", true);        // ทำการส่ง Key Field Status เป็น True
                             startActivity(intent);
                             getActivity().finish();
                         } else {

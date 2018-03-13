@@ -70,6 +70,8 @@ public class QRscanFragment extends Fragment{
 
                         Intent intent = getActivity().getIntent();                 // กำหนด Layout ที่ต้องการให้ไปเมื่อ restart activity
                         intent.putExtra("Login", loginStrings);              // ใส่ log in
+                        intent.putExtra("Status", false);               // เพื่อกำหนดว่าไปหน้า layout ไหน
+                        intent.putExtra("QRcode", resultString);            // ส่งค่า QR (กรณีไม่มีการรับก็ไม่เป็นไร)
                         startActivity(intent);                                     // restart activity
 
 //                        getActivity().getSupportFragmentManager()                //เปลี่ยนหน้าไปยังหน้า Display QR Code
