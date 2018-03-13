@@ -16,7 +16,7 @@ import palm.cpn.co.th.palmqrcode.R;
 public class DetailFragment extends Fragment {
 
 
-    public DetailFragment detailInstance(String nameFood,
+    public static DetailFragment detailInstance(String nameFood,
                                          String imagePath,
                                          String category,
                                          String price,
@@ -29,7 +29,7 @@ public class DetailFragment extends Fragment {
         bundle.putString("Category", category);
         bundle.putString("Price", price);
         bundle.putString("Detail", detail);
-        detailFragment.setArguments(bundle);            // นำ Bundle ไปเก็บไว้ในกล่อง
+        detailFragment.setArguments(bundle);            // นำ Bundle ไปเก็บไว้ในกล่อง (Argument)
 
         return detailFragment;
 

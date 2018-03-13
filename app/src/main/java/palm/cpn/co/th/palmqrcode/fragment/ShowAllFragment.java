@@ -51,11 +51,11 @@ public class ShowAllFragment extends Fragment {
 
             JSONArray jsonArray = new JSONArray(jsonString);            // Create เพื่อเก็บ String ที่อยู่ในรูปแบบ JSON
 
-            String[] nameFoodStrings = new String[jsonArray.length()];  // เก็บ Array ของ name
-            String[] imagePathStrings = new String[jsonArray.length()]; // เก็บ Array ของ imagePath
-            String[] categoryStrings = new String[jsonArray.length()];
-            String[] priceStrings = new String[jsonArray.length()];
-            String[] detailStrings = new String[jsonArray.length()];
+            final String[] nameFoodStrings = new String[jsonArray.length()];  // เก็บ Array ของ name
+            final String[] imagePathStrings = new String[jsonArray.length()]; // เก็บ Array ของ imagePath
+            final String[] categoryStrings = new String[jsonArray.length()];
+            final String[] priceStrings = new String[jsonArray.length()];
+            final String[] detailStrings = new String[jsonArray.length()];
 
 
             for (int i = 0; i < jsonArray.length(); i += 1) {
@@ -74,7 +74,17 @@ public class ShowAllFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
+//                    Replace Fragment with Detail
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.contentServiceFragment, DetailFragment.detailInstance(
+                                    nameFoodStrings[i],
+                                    imagePathStrings[i],
+                                    categoryStrings[i],
+                                    priceStrings[i],
+                                    detailStrings[i]))
+                            .addToBackStack(null).commit();
 
                 }
             });
