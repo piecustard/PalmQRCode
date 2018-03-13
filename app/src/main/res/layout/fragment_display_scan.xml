@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--Display QR code-->
+    <TextView
+        android:id="@+id/txtQRcode"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_margin="@dimen/padding"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="@dimen/h1"
+        android:text="QR code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!--Search QR code-->
+    <Button
+        android:id="@+id/btnSearchQR"
+        android:text="Search QR code"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/image"
+        android:layout_height="wrap_content" />
+
+
+    <!--QR Scan-->
+    <Button
+        android:id="@+id/btnQRscan"
+        android:text="QR scan"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="@dimen/image"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

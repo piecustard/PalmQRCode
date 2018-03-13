@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import palm.cpn.co.th.palmqrcode.fragment.QRscanFragment;
 import palm.cpn.co.th.palmqrcode.fragment.ShowAllFragment;
 
 public class ServiceActivity extends AppCompatActivity {
@@ -33,13 +36,67 @@ public class ServiceActivity extends AppCompatActivity {
         createToolbar();
 
 //        Add Fragment to Activity
+        addFragment(savedInstanceState);
+
+//        Show Read All
+        showReadAll();
+
+//        QR Scan Controller
+        qrController();
+
+//        Exit Controller
+        exitController();
+
+    }   // Main Method
+
+    private void exitController() {
+        TextView textView = findViewById(R.id.txtExit);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
+    private void qrController() {
+        TextView textView = findViewById(R.id.txtQRscan);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getSupportFragmentManager().beginTransaction()                          // Open Page
+                        .replace(R.id.contentServiceFragment, QRscanFragment.qRscanInstance(loginStrings))
+                        .commit();
+                drawerLayout.closeDrawers();                                            // Close Drawer
+
+            }
+        });
+    }
+
+    private void showReadAll() {
+        TextView textView = findViewById(R.id.txtShowAll);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentServiceFragment, new ShowAllFragment())
+                        .commit();
+                drawerLayout.closeDrawers(); // ถ้ามี Drawer ให้ปิดอัตโนมัติด้วย
+
+            }
+        });
+    }
+
+
+    private void addFragment(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.contentServiceFragment, new ShowAllFragment())
                     .commit();
         }
-
-    }   // Main Method
+    }
 
     private void createToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbarService);

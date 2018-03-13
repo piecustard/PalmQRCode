@@ -61,6 +61,7 @@
 
             <!--Title-->
             <TextView
+                android:id="@+id/txtShowAll"
                 android:clickable="true"
                 android:textColor="@color/colorPrimary"
                 android:layout_gravity="center_vertical"
@@ -85,6 +86,7 @@
 
             <!--Title-->
             <TextView
+                android:id="@+id/txtQRscan"
                 android:clickable="true"
                 android:textColor="@color/colorPrimary"
                 android:layout_gravity="center_vertical"
@@ -109,6 +111,7 @@
 
             <!--Title-->
             <TextView
+                android:id="@+id/txtExit"
                 android:clickable="true"
                 android:textColor="@color/colorPrimary"
                 android:layout_gravity="center_vertical"
