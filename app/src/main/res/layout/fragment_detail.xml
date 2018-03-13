@@ -16,7 +16,7 @@
 
             <!--Title-->
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/txttitle"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
@@ -79,6 +79,7 @@
 
     <!--Show ListView Button-->
     <Button
+        android:text="Back to Show All"
         android:id="@+id/btnShowListView"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
